@@ -12,6 +12,7 @@ import {
   Leaf, 
   Award,
   User,
+  Users,
   Star,
   Calendar,
   Trophy,
@@ -184,6 +185,18 @@ const App = () => {
               </p>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="flex space-x-1 mb-8 glass-card p-1 w-fit">
+          <Link to="/app" className="px-6 py-3 rounded-xl bg-primary text-primary-foreground shadow-lg flex items-center space-x-2">
+            <TreePine className="h-4 w-4" />
+            <span>Courses</span>
+          </Link>
+          <Link to="/app/connect" className="px-6 py-3 rounded-xl text-muted-foreground hover:text-foreground transition-all duration-300 flex items-center space-x-2">
+            <Users className="h-4 w-4" />
+            <span>Connect</span>
+          </Link>
         </div>
 
         {/* Courses Section */}

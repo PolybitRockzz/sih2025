@@ -7,6 +7,7 @@ import Landing from "./pages/Landing";
 import App from "./pages/App";
 import Login from "./pages/Login";
 import Course from "./pages/Course";
+import Connect from "./pages/Connect";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const AppRouter = () => (
           <Route path="/app" element={<App />} />
           <Route path="/app/login" element={<Login />} />
           <Route path="/app/course/:courseId" element={<Course />} />
+          <Route path="/app/connect" element={<Connect />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

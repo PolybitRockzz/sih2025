@@ -11,7 +11,7 @@ All colors MUST be HSL for consistency.
     /* Nature-inspired gradient backgrounds */
     --gradient-primary: linear-gradient(135deg, 120 60% 15%, 160 70% 25%, 180 55% 35%);
     --gradient-secondary: linear-gradient(135deg, 35 55% 45%, 120 45% 55%, 160 50% 65%);
-    --gradient-hero: linear-gradient(135deg, 210 100% 85%, 160 70% 75%, 120 60% 65%);
+    --gradient-hero: linear-gradient(135deg, 60 100% 90%, 120 70% 85%);
     
     /* Glass morphism backgrounds */
     --glass-primary: 120 60% 95% / 0.1;

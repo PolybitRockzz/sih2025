@@ -55,7 +55,10 @@ const Landing = () => {
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Leaf className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold gradient-text">EcoLearn</span>
+            <div>
+              <span className="text-2xl font-bold gradient-text">EduQuest</span>
+              <p className="text-xs text-muted-foreground mt-1">The GreenLeap Journey</p>
+            </div>
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-foreground hover:text-primary transition-colors">Features</a>
@@ -128,7 +131,7 @@ const Landing = () => {
       <section id="features" className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Why Choose EcoLearn?</h2>
+            <h2 className="text-4xl font-bold mb-4">Why Choose EduQuest?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Experience the future of environmental education with our innovative, gamified learning platform
             </p>
@@ -219,14 +222,17 @@ const Landing = () => {
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <Leaf className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold gradient-text">EcoLearn</span>
+              <div>
+                <span className="text-2xl font-bold gradient-text">EduQuest</span>
+                <p className="text-xs text-muted-foreground mt-1">The GreenLeap Journey</p>
+              </div>
             </div>
             <div className="text-center md:text-right">
               <p className="text-muted-foreground">
                 Empowering the next generation of environmental stewards
               </p>
               <p className="text-sm text-muted-foreground mt-2">
-                © 2024 EcoLearn. Aligned with NEP 2020 & SDG Goals.
+                © 2024 EduQuest. Aligned with NEP 2020 & SDG Goals.
               </p>
             </div>
           </div>

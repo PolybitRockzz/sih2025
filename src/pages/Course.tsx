@@ -300,95 +300,117 @@ const Course = () => {
         {/* Course Roadmap */}
         <Card className="glass-card border-card-border">
           <CardHeader>
-            <CardTitle>Course Roadmap</CardTitle>
+            <CardTitle>Learning Journey</CardTitle>
             <CardDescription>
-              Complete lessons in order to unlock the next module
+              Follow the path to mastery - complete each step to unlock the next
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {course.lessons.map((lesson, index) => {
-                const isLocked = index > 0 && !course.lessons[index - 1].completed && !lesson.completed;
-                const isCurrent = lesson.current || (!lesson.completed && !isLocked);
-                
-                return (
-                  <div
-                    key={lesson.id}
-                    className={`flex items-center space-x-4 p-4 rounded-xl border transition-all duration-300 ${
-                      lesson.completed 
-                        ? 'border-primary/30 bg-primary/5' 
-                        : isCurrent 
-                        ? 'border-secondary/30 bg-secondary/5 animate-glow' 
-                        : isLocked
-                        ? 'border-muted/30 bg-muted/5 opacity-60'
-                        : 'border-card-border bg-card/50 hover:bg-card/80'
-                    }`}
-                  >
-                    <div className="flex-shrink-0">
-                      {lesson.completed ? (
-                        <div className="p-2 bg-primary rounded-lg text-primary-foreground">
-                          <CheckCircle className="h-5 w-5" />
+            <div className="relative">
+              {/* Road Path */}
+              <div className="absolute left-8 top-8 bottom-8 w-1 bg-gradient-to-b from-primary via-secondary to-accent opacity-30"></div>
+              
+              <div className="space-y-6">
+                {course.lessons.map((lesson, index) => {
+                  const isLocked = index > 0 && !course.lessons[index - 1].completed && !lesson.completed;
+                  const isCurrent = lesson.current || (!lesson.completed && !isLocked);
+                  
+                  return (
+                    <div key={lesson.id} className="relative flex items-start space-x-6">
+                      {/* Road Node */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div className={`w-16 h-16 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${
+                          lesson.completed 
+                            ? 'bg-primary border-primary text-primary-foreground shadow-lg animate-glow' 
+                            : isCurrent 
+                            ? 'bg-secondary border-secondary text-secondary-foreground shadow-lg animate-pulse' 
+                            : isLocked
+                            ? 'bg-muted border-muted text-muted-foreground opacity-60'
+                            : 'bg-card border-border hover:border-primary transition-colors'
+                        }`}>
+                          {lesson.completed ? (
+                            <CheckCircle className="h-8 w-8" />
+                          ) : isLocked ? (
+                            <Lock className="h-6 w-6" />
+                          ) : (
+                            <div className="text-white">
+                              {getLessonIcon(lesson.type)}
+                            </div>
+                          )}
                         </div>
-                      ) : isLocked ? (
-                        <div className="p-2 bg-muted rounded-lg text-muted-foreground">
-                          <Lock className="h-5 w-5" />
-                        </div>
-                      ) : (
-                        <div className={`p-2 ${getLessonBadgeColor(lesson.type)} rounded-lg text-white`}>
-                          {getLessonIcon(lesson.type)}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center space-x-3 mb-1">
-                        <h3 className={`font-medium ${lesson.completed ? 'text-primary' : 'text-foreground'}`}>
-                          {lesson.title}
-                        </h3>
-                        <Badge variant="secondary" className="text-xs">
-                          {lesson.type}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          +{lesson.points} pts
-                        </Badge>
+                        
+                        {/* Connecting Line to Next Node */}
+                        {index < course.lessons.length - 1 && (
+                          <div className={`absolute left-1/2 top-16 w-1 h-6 -translate-x-1/2 ${
+                            lesson.completed ? 'bg-primary' : 'bg-border'
+                          } opacity-50`}></div>
+                        )}
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {lesson.description}
-                      </p>
-                      <div className="flex items-center space-x-4 text-xs text-muted-foreground">
-                        <div className="flex items-center space-x-1">
-                          <Clock className="h-3 w-3" />
-                          <span>{lesson.duration}</span>
+
+                      {/* Lesson Card */}
+                      <div className={`flex-1 glass-card border-card-border p-6 rounded-2xl transition-all duration-300 ${
+                        lesson.completed 
+                          ? 'border-primary/30 bg-primary/5' 
+                          : isCurrent 
+                          ? 'border-secondary/30 bg-secondary/5' 
+                          : isLocked
+                          ? 'opacity-60'
+                          : 'hover:bg-card/80'
+                      }`}>
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-3 mb-2">
+                              <h3 className={`font-bold text-lg ${lesson.completed ? 'text-primary' : 'text-foreground'}`}>
+                                {lesson.title}
+                              </h3>
+                              <Badge variant="secondary" className="text-xs">
+                                {lesson.type}
+                              </Badge>
+                            </div>
+                            <p className="text-muted-foreground mb-3">
+                              {lesson.description}
+                            </p>
+                            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                              <div className="flex items-center space-x-1">
+                                <Clock className="h-4 w-4" />
+                                <span>{lesson.duration}</span>
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <Award className="h-4 w-4" />
+                                <span>+{lesson.points} pts</span>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex-shrink-0 ml-4">
+                            {lesson.completed ? (
+                              <Badge variant="secondary" className="glass-card">
+                                ✅ Completed
+                              </Badge>
+                            ) : isCurrent ? (
+                              <Button variant="hero" size="lg" asChild>
+                                <Link to={`/app/lesson/${lesson.id}`}>
+                                  Continue Journey
+                                </Link>
+                              </Button>
+                            ) : isLocked ? (
+                              <Badge variant="outline" className="opacity-60">
+                                🔒 Locked
+                              </Badge>
+                            ) : (
+                              <Button variant="eco" size="sm" asChild>
+                                <Link to={`/app/lesson/${lesson.id}`}>
+                                  Begin
+                                </Link>
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-
-                    <div className="flex-shrink-0">
-                      {lesson.completed ? (
-                        <Badge variant="secondary" className="glass-card">
-                          Completed
-                        </Badge>
-                      ) : isCurrent ? (
-                        <Button variant="eco" size="sm" asChild>
-                          <Link to={`/app/lesson/${lesson.id}`}>
-                            Start
-                          </Link>
-                        </Button>
-                      ) : isLocked ? (
-                        <Badge variant="outline" className="opacity-60">
-                          Locked
-                        </Badge>
-                      ) : (
-                        <Button variant="outline" size="sm" asChild>
-                          <Link to={`/app/lesson/${lesson.id}`}>
-                            Begin
-                          </Link>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </CardContent>
         </Card>
