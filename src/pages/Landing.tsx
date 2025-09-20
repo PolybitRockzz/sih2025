@@ -82,7 +82,7 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
-              <Badge variant="secondary" className="glass-card text-primary">
+              <Badge variant="secondary" className="glass-card text-white">
                 🌱 NEP 2020 Aligned Educational Platform
               </Badge>
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
@@ -238,7 +238,7 @@ const Landing = () => {
                 Empowering the next generation of environmental stewards
               </p>
               <p className="text-sm text-muted-foreground mt-2">
-                © 2024 EduQuest. Aligned with NEP 2020 & SDG Goals.
+                © 2025 EduQuest. Aligned with NEP 2020 & SDG Goals.
               </p>
             </div>
           </div>
