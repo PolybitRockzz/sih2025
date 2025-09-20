@@ -144,6 +144,62 @@ const Course = () => {
           points: 60
         }
       ]
+    },
+    "2": {
+      title: "Waste Management",
+      description: "Master the art of reduce, reuse, and recycle with practical activities and quizzes.",
+      icon: <Recycle className="h-8 w-8" />,
+      difficulty: "Beginner",
+      duration: "10 days",
+      students: 980,
+      progress: 30,
+      color: "from-blue-500 to-cyan-600",
+      lessons: [
+        { id: 1, title: "Introduction to Waste Streams", description: "What is dry, wet, and hazardous waste?", duration: "12 min", type: "Video", completed: true, points: 20 },
+        { id: 2, title: "Segregation at Source", description: "Learn how to separate waste at home and school", duration: "18 min", type: "Interactive", completed: true, points: 30 },
+        { id: 3, title: "Recycling Basics", description: "What materials can be recycled and how?", duration: "15 min", type: "Reading", completed: false, current: true, points: 20 },
+        { id: 4, title: "Composting 101", description: "Turn kitchen scraps into nutrient-rich compost", duration: "2 days", type: "Project", completed: false, points: 60 },
+        { id: 5, title: "Electronic Waste", description: "Safely disposing and recycling e-waste", duration: "14 min", type: "Video", completed: false, points: 25 },
+        { id: 6, title: "Waste Sorting Quiz", description: "Test your segregation skills", duration: "10 min", type: "Quiz", completed: false, points: 40 }
+      ]
+    },
+    
+    "3": {
+      title: "Water Conservation",
+      description: "Discover strategies to preserve and use water responsibly in daily life.",
+      icon: <Droplets className="h-8 w-8" />,
+      difficulty: "Intermediate",
+      duration: "2 weeks",
+      students: 1120,
+      progress: 60,
+      color: "from-cyan-500 to-blue-600",
+      lessons: [
+        { id: 1, title: "Global Water Crisis", description: "Why water conservation matters", duration: "10 min", type: "Video", completed: true, points: 20 },
+        { id: 2, title: "Household Water Audit", description: "Measure your daily water usage", duration: "1 day", type: "Project", completed: true, points: 50 },
+        { id: 3, title: "Fixing Leaks", description: "Identify and fix common leaks", duration: "20 min", type: "Interactive", completed: true, points: 30 },
+        { id: 4, title: "Rainwater Harvesting", description: "Basics of capturing and storing rainwater", duration: "25 min", type: "Reading", completed: false, current: true, points: 25 },
+        { id: 5, title: "Efficient Irrigation", description: "Drip vs sprinkler systems", duration: "15 min", type: "Video", completed: false, points: 25 },
+        { id: 6, title: "Water-Saving Challenge", description: "Reduce usage by 20% for a week", duration: "7 days", type: "Challenge", completed: false, points: 80 }
+      ]
+    },
+    
+    "4": {
+      title: "Renewable Energy",
+      description: "Explore solar, wind, and other sustainable energy solutions for a cleaner future.",
+      icon: <Sun className="h-8 w-8" />,
+      difficulty: "Advanced",
+      duration: "3 weeks",
+      students: 860,
+      progress: 0,
+      color: "from-yellow-500 to-orange-600",
+      lessons: [
+        { id: 1, title: "Introduction to Renewables", description: "What are renewable energy sources?", duration: "12 min", type: "Video", completed: false, current: true, points: 20 },
+        { id: 2, title: "Solar Energy Basics", description: "How solar panels work", duration: "18 min", type: "Reading", completed: false, points: 25 },
+        { id: 3, title: "Wind Power", description: "Harnessing wind for electricity", duration: "15 min", type: "Video", completed: false, points: 25 },
+        { id: 4, title: "Energy Efficiency", description: "Reduce consumption at home and school", duration: "20 min", type: "Interactive", completed: false, points: 30 },
+        { id: 5, title: "Build a Solar Oven", description: "Hands-on mini project using sunlight", duration: "1 day", type: "Project", completed: false, points: 70 },
+        { id: 6, title: "Renewables Quiz", description: "Check your understanding", duration: "15 min", type: "Quiz", completed: false, points: 40 }
+      ]
     }
   };
 
