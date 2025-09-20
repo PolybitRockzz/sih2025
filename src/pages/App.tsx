@@ -210,7 +210,7 @@ const App = () => {
 
           <div className="grid lg:grid-cols-2 gap-6">
             {courses.map((course) => (
-              <Card key={course.id} className="glass-card border-card-border hover:animate-scale-in cursor-pointer group">
+              <Card key={course.id} className="glass-card border-card-border hover:bg-white/30 transition-colors duration-300 cursor-pointer group">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex items-center space-x-3">
