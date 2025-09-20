@@ -48,8 +48,14 @@ const Landing = () => {
     { icon: <Leaf className="h-6 w-6" />, title: "Sustainable Living", count: "20 lessons" }
   ];
 
+  const contactMailto = `mailto:24052435@kiit.ac.in?subject=${encodeURIComponent(
+    'Inquiry about EduQuest for schools'
+  )}&body=${encodeURIComponent(
+    'Hello,\n\nI am interested in EduQuest for my school. Please provide details on implementation, pricing, and training for educators.\n\nSchool Name:\nContact Info:\n\nThank you,\n'
+  )}`;
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-bl from-yellow-100 to-green-100">
       {/* Header */}
       <header className="backdrop-blur-md bg-white/10 border-b border-white/20 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
@@ -139,7 +145,7 @@ const Landing = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="glass-card border-card-border animate-fade-in hover:animate-scale-in">
+              <Card key={index} className="glass-card border-card-border animate-fade-in hover:bg-white/30 transition-colors duration-300">
                 <CardHeader>
                   <div className="text-primary mb-2">{feature.icon}</div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
@@ -167,7 +173,7 @@ const Landing = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map((course, index) => (
-              <Card key={index} className="glass-card border-card-border hover:animate-scale-in cursor-pointer group">
+              <Card key={index} className="glass-card border-card-border hover:bg-white/30 transition-colors duration-300 cursor-pointer group">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="text-primary group-hover:text-primary-glow transition-colors">
@@ -208,8 +214,8 @@ const Landing = () => {
               <Button variant="hero" size="hero" asChild>
                 <Link to="/app">Start Your Journey</Link>
               </Button>
-              <Button variant="outline" size="lg">
-                Contact Schools
+              <Button variant="outline" size="lg" asChild>
+                <a href={contactMailto} target="_blank" rel="noopener noreferrer">Contact Schools</a>
               </Button>
             </div>
           </div>
