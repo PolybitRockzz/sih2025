@@ -19,6 +19,14 @@ import {
   ChevronRight,
   LogOut
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const App = () => {
   const navigate = useNavigate();
@@ -97,13 +105,91 @@ const App = () => {
     }
   ];
 
-  const userStats = {
-    name: "Priya Sharma",
-    totalPoints: 350,
-    completedCourses: 1,
-    currentStreak: 7,
-    badges: 3,
-    rank: "Eco Warrior"
+  const [userStats, setUserStats] = useState(() => {
+    const savedPoints = Number.parseInt(localStorage.getItem("user_total_points") || "", 10);
+    return {
+      name: "Priya Sharma",
+      totalPoints: Number.isFinite(savedPoints) ? savedPoints : 350,
+      completedCourses: 1,
+      currentStreak: 7,
+      badges: 3,
+      rank: "Eco Warrior",
+    };
+  });
+
+  type QuickAction = {
+    id: number;
+    title: string;
+    description: string;
+    icon: JSX.Element;
+    points: number;
+    variant: "eco" | "secondary" | "outline";
+  };
+
+  const quickActions: QuickAction[] = [
+    {
+      id: 1,
+      title: "Plant a Tree Challenge",
+      description:
+        "Plant a sapling in your neighborhood or school garden. Take a photo, note the species, and water it for a week.",
+      icon: <TreePine className="h-6 w-6" />,
+      points: 50,
+      variant: "eco",
+    },
+    {
+      id: 2,
+      title: "Waste Sorting Quiz",
+      description:
+        "Complete a short quiz about segregating waste into dry, wet, and hazardous categories.",
+      icon: <Recycle className="h-6 w-6" />,
+      points: 25,
+      variant: "secondary",
+    },
+    {
+      id: 3,
+      title: "Share Progress",
+      description:
+        "Share your latest achievement with your class or on the school community board to inspire others.",
+      icon: <Award className="h-6 w-6" />,
+      points: 10,
+      variant: "outline",
+    },
+  ];
+
+  const [completedActions, setCompletedActions] = useState<Record<number, boolean>>(() => {
+    try {
+      const saved = localStorage.getItem("quick_actions_done");
+      return saved ? (JSON.parse(saved) as Record<number, boolean>) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  const [selectedAction, setSelectedAction] = useState<QuickAction | null>(null);
+  const [isActionOpen, setIsActionOpen] = useState(false);
+
+  const openAction = (action: QuickAction) => {
+    if (completedActions[action.id]) return; // already done
+    setSelectedAction(action);
+    setIsActionOpen(true);
+  };
+
+  const handleDoneAction = () => {
+    if (!selectedAction) return;
+    const id = selectedAction.id;
+    if (completedActions[id]) {
+      setIsActionOpen(false);
+      return;
+    }
+    const updatedCompleted = { ...completedActions, [id]: true };
+    setCompletedActions(updatedCompleted);
+    localStorage.setItem("quick_actions_done", JSON.stringify(updatedCompleted));
+
+    const newPoints = userStats.totalPoints + selectedAction.points;
+    setUserStats((prev) => ({ ...prev, totalPoints: newPoints }));
+    localStorage.setItem("user_total_points", String(newPoints));
+
+    setIsActionOpen(false);
   };
 
   if (!isAuthenticated) {
@@ -273,22 +359,44 @@ const App = () => {
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-4">
-              <Button variant="eco" className="h-auto p-4 flex-col space-y-2">
-                <TreePine className="h-6 w-6" />
-                <span>Plant a Tree Challenge</span>
-                <span className="text-xs opacity-80">+50 points</span>
-              </Button>
-              <Button variant="secondary" className="h-auto p-4 flex-col space-y-2">
-                <Recycle className="h-6 w-6" />
-                <span>Waste Sorting Quiz</span>
-                <span className="text-xs opacity-80">+25 points</span>
-              </Button>
-              <Button variant="outline" className="h-auto p-4 flex-col space-y-2">
-                <Award className="h-6 w-6" />
-                <span>Share Progress</span>
-                <span className="text-xs opacity-80">+10 points</span>
-              </Button>
+              {quickActions.map((action) => {
+                const done = !!completedActions[action.id];
+                return (
+                  <Button
+                    key={action.id}
+                    variant={action.variant}
+                    className="h-auto p-4 flex-col space-y-2"
+                    onClick={() => openAction(action)}
+                    disabled={done}
+                    aria-disabled={done}
+                    title={done ? "Completed" : undefined}
+                  >
+                    {action.icon}
+                    <span>{action.title}</span>
+                    <span className="text-xs opacity-80">+{action.points} points</span>
+                  </Button>
+                );
+              })}
             </div>
+            <Dialog open={isActionOpen} onOpenChange={setIsActionOpen}>
+              <DialogContent className="glass-card">
+                <DialogHeader>
+                  <DialogTitle>{selectedAction?.title}</DialogTitle>
+                  <DialogDescription>
+                    {selectedAction?.description}
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="mt-2 text-sm text-muted-foreground">
+                  {selectedAction && (
+                    <p>Complete this activity to earn <span className="font-medium text-primary">+{selectedAction.points} points</span>.</p>
+                  )}
+                </div>
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setIsActionOpen(false)}>Close</Button>
+                  <Button variant="hero" onClick={handleDoneAction}>Done</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </CardContent>
         </Card>
       </div>
