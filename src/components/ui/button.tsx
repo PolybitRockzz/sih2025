@@ -9,15 +9,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl shadow-lg hover:shadow-xl hover:scale-105",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl shadow-lg hover:shadow-xl",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-xl",
-        outline: "border border-white/30 bg-white/20 backdrop-blur-sm text-foreground hover:bg-white/30 hover:scale-105 rounded-xl",
+        outline: "border border-white/30 bg-white/20 backdrop-blur-sm text-foreground hover:bg-white/30 rounded-xl",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-xl shadow-lg hover:shadow-xl",
         ghost: "hover:bg-white/20 hover:text-foreground rounded-xl backdrop-blur-sm",
         link: "text-primary underline-offset-4 hover:underline",
-        glass: "backdrop-blur-md bg-white/20 border border-white/30 text-white hover:bg-white/30 hover:scale-105 rounded-xl shadow-lg hover:shadow-xl",
-        hero: "backdrop-blur-md bg-gradient-to-r from-primary to-secondary text-white hover:from-primary-glow hover:to-secondary-glow hover:scale-105 rounded-xl shadow-lg hover:shadow-2xl glow-primary",
-        eco: "bg-gradient-to-r from-primary to-accent text-white hover:from-primary-glow hover:to-accent-glow hover:scale-105 rounded-xl shadow-lg hover:shadow-xl",
+        glass: "backdrop-blur-md bg-white/20 border border-white/30 text-gray-800 hover:bg-white/30 rounded-xl shadow-lg hover:shadow-xl",
+        hero: "backdrop-blur-md bg-gradient-to-r from-primary to-secondary text-gray-800 hover:from-primary-glow hover:to-secondary-glow rounded-xl shadow-lg hover:shadow-2xl glow-primary",
+        eco: "bg-gradient-to-r from-primary to-accent text-white hover:from-primary-glow hover:to-accent-glow rounded-xl shadow-lg hover:shadow-xl",
       },
       size: {
         default: "h-12 px-6 py-3",
